@@ -46,6 +46,15 @@ public class TakingTurnsQueue
                 _people.Enqueue(person);
             }
 
+            else if (person.Turns <= 0)
+            {
+                _people.Enqueue(person);
+            }
+            else if (person.Turns == 1)
+            {
+                Console.WriteLine("No more turns");
+            }
+
             return person;
         }
     }
