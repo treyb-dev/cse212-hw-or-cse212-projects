@@ -35,13 +35,18 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
-        // Get the start index of the given amount from the list
+
+        // Find where the last amount items begin by subtracting
+        // amount from the total number of items in the list.
         int startIndex = data.Count - amount;
 
+        // Copy those last items into a separate list, keeping their order.
         List<int> lastItems = data.GetRange(startIndex, amount);
 
+        // Remove those items from the original list.
         data.RemoveRange(startIndex, amount);
 
+        // Insert the saved items at index 0 of the original list.
         data.InsertRange(0, lastItems);
 
     }

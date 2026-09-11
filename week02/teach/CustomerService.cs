@@ -15,6 +15,9 @@ public class CustomerService {
         // Expected Result: 
         Console.WriteLine("Test 1");
 
+        var cs = new CustomerService(5);
+        Console.WriteLine(cs);
+
         // Defect(s) Found: 
 
         Console.WriteLine("=================");
@@ -24,11 +27,15 @@ public class CustomerService {
         // Expected Result: 
         Console.WriteLine("Test 2");
 
+        var cs = new CustomerService(0);
+        Console.WriteLine(cs);
+
         // Defect(s) Found: 
 
         Console.WriteLine("=================");
 
         // Add more Test Cases As Needed Below
+        
     }
 
     private readonly List<Customer> _queue = new();
