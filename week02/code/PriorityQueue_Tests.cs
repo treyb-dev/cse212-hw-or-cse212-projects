@@ -28,7 +28,8 @@ public class PriorityQueueTests
         [TestMethod]
     // Scenario: Remove an item when two items have the same highest priority.
     // Expected Result: The first item added with that priority is removed first (FIFO).
-    // Defect(s) Found: None.
+    // Defect(s) Found: The Dequeue method did not maintain FIFO order for items with equal priority 
+    // because equal priority items replaced the earlier item in the queue.
     public void TestPriorityQueue_Dequeue_SamePriorityUsesFIFO()
     {
         var priorityQueue = new PriorityQueue();
@@ -61,7 +62,8 @@ public class PriorityQueueTests
     [TestMethod]
     // Scenario: The highest priority item was added after lower priority items.
     // Expected Result: Dequeue removes and returns the highest priority item.
-    // Defect(s) Found: 
+    // Defect(s) Found: The Dequeue method did not check the final item in the queue when searching for 
+    // the highest priority item, causing incorrect results when the highest priority item was added last.
     public void TestPriorityQueue_Dequeue_HighestPriorityAddedLast()
     {
         var priorityQueue = new PriorityQueue();
@@ -73,5 +75,22 @@ public class PriorityQueueTests
         var result = priorityQueue.Dequeue();
 
         Assert.AreEqual("C", result);
+    }
+
+        [TestMethod]
+    // Scenario: Remove multiple items from the queue in priority order.
+    // Expected Result: Each Dequeue removes the current highest priority item until the queue is empty.
+    // Defect(s) Found: Before the fix, Dequeue returned the highest priority item but did not remove it from the queue.
+    public void TestPriorityQueue_Dequeue_MultipleItems()
+    {
+        var priorityQueue = new PriorityQueue();
+
+        priorityQueue.Enqueue("A", 2);
+        priorityQueue.Enqueue("B", 4);
+        priorityQueue.Enqueue("C", 10);
+
+        Assert.AreEqual("C", priorityQueue.Dequeue());
+        Assert.AreEqual("B", priorityQueue.Dequeue());
+        Assert.AreEqual("A", priorityQueue.Dequeue());
     }
 }
