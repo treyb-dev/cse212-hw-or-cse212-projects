@@ -1,4 +1,6 @@
-﻿public static class DisplaySums {
+﻿using System.ComponentModel;
+
+public static class DisplaySums {
     public static void Run() {
         DisplaySumPairs([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
         // Should show something like (order does not matter):
@@ -29,5 +31,25 @@
     /// <param name="numbers">array of integers</param>
     private static void DisplaySumPairs(int[] numbers) {
         // TODO Problem 2 - This should print pairs of numbers in the given array
+
+        // First we create an empty set
+        HashSet<int> seen = new();
+        int numberNeeded = 0;
+        
+        // We loop through the numbers to find the number need to make 10
+        foreach (int number in numbers)
+        {
+            numberNeeded = 10 - number;
+            // Check if the number needed is in the set
+            if (seen.Contains(numberNeeded))
+            {
+                // print the pair we found
+                Console.WriteLine($"{number} {numberNeeded} = 10");
+
+            }
+            // add the number to the set
+            seen.Add(number);
+
+        }
     }
 }
